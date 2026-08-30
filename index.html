@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibrahim Al-Maadawi | Data Analyst Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#f97316',
+                            glow: '#ff6b00',
+                            dark: '#0b0f17',
+                            lightBg: '#f8fafc',
+                            card: '#161d2a',
+                            lightCard: '#ffffff',
+                            border: '#2a3447',
+                            lightBorder: '#e2e8f0',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark body {
+            background-color: #0b0f17;
+            color: #f3f4f6;
+        }
+
+        html:not(.dark) body {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .orange-glow {
+            text-shadow: 0 0 20px rgba(249, 115, 22, 0.6);
+        }
+        
+        .box-glow:hover {
+            box-shadow: 0 0 25px rgba(249, 115, 22, 0.25);
+            border-color: #f97316;
+        }
+
+        .gradient-orange-text {
+            background: linear-gradient(135deg, #ff8c32, #f97316, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-nav-dark {
+            background: rgba(11, 15, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(249, 115, 22, 0.15);
+        }
+
+        html:not(.dark) .glass-nav-dark {
+            background: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(249, 115, 22, 0.2);
+        }
+
+        #data-bg {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: inherit;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="relative dark">
+
+    <canvas id="data-bg"></canvas>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="fixed w-full z-50 glass-nav-dark px-6 lg:px-16 py-4 flex justify-between items-center transition-colors duration-300">
+        <div class="flex items-center gap-3 group cursor-pointer" onclick="openGalleryModal(1)">
+            <img src="logo_2.jpg.jpg" alt="Logo" class="w-11 h-11 rounded-full border-2 border-brand-orange object-cover group-hover:rotate-12 transition-transform duration-300" onerror="this.onerror=null; this.src='logo_2.jpg';">
+            <span class="font-extrabold text-xl tracking-wide dark:text-white text-gray-900">IBRAHIM <span class="text-brand-orange">AL-MAADAWI</span></span>
+        </div>
+        
+        <div class="hidden xl:flex space-x-6 font-extrabold text-sm tracking-wider uppercase dark:text-gray-300 text-gray-700">
+            <a href="#about" class="hover:text-brand-orange transition-colors" data-en="About" data-ar="عني">About</a>
+            <a href="#skills" class="hover:text-brand-orange transition-colors" data-en="Skills" data-ar="المهارات">Skills</a>
+            <a href="#experience" class="hover:text-brand-orange transition-colors" data-en="Experience" data-ar="الخبرات">Experience</a>
+            <a href="#projects" class="hover:text-brand-orange transition-colors" data-en="Projects" data-ar="المشاريع">Projects</a>
+            <a href="#certs" class="hover:text-brand-orange transition-colors" data-en="Certifications" data-ar="الشهادات">Certifications</a>
+            <a href="#github-feed" class="hover:text-brand-orange transition-colors" data-en="GitHub" data-ar="جيت هับ">GitHub</a>
+            <a href="#blog" class="hover:text-brand-orange transition-colors" data-en="Blog" data-ar="المدونة">Blog</a>
+            <a href="#contact" class="hover:text-brand-orange transition-colors" data-en="Contact" data-ar="التواصل">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()" class="w-10 h-10 rounded-full dark:bg-brand-card bg-gray-200 border dark:border-brand-border border-gray-300 flex items-center justify-center text-brand-orange transition-all shadow-sm">
+                <i id="theme-icon" class="fa-solid fa-sun"></i>
+            </button>
+            <!-- Language Toggle -->
+            <button onclick="toggleLanguage()" class="px-3 py-2 rounded-full dark:bg-brand-card bg-gray-200 border dark:border-brand-border border-gray-300 font-extrabold text-xs text-brand-orange transition-all shadow-sm">
+                <span id="lang-label">عربي</span>
+            </button>
+            <a href="DA.Ibrahim_2.pdf" target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-brand-orange hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-full shadow-lg transition-all text-sm">
+                <i class="fa-solid fa-eye"></i> <span data-en="CV" data-ar="السيرة الذاتية">CV</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="relative z-10 min-h-screen flex items-center justify-center px-6 lg:px-16 pt-24">
+        <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-brand-orange font-extrabold text-sm shadow-sm animate-pulse" data-aos="fade-down">
+                    <span class="w-2.5 h-2.5 rounded-full bg-brand-orange animate-ping"></span>
+                    <span data-en="Available for New Projects – Let's Work Together" data-ar="متاح لمشاريع جديدة - لنعمل معاً">Available for New Projects – Let's Work Together</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight dark:text-white text-gray-900" data-aos="fade-up" data-aos-delay="100">
+                    <span data-en="Hi, I'm" data-ar="أهلاً، أنا">Hi, I'm</span> <span class="gradient-orange-text orange-glow">Ibrahim Al-Maadawi</span><br>
+                    <span class="text-2xl sm:text-4xl font-extrabold dark:text-gray-300 text-gray-700" data-en="Data Analyst" data-ar="محلل بيانات">Data Analyst</span>
+                </h1>
+
+                <p class="font-bold text-lg max-w-2xl leading-relaxed dark:text-gray-300 text-gray-600" data-aos="fade-up" data-aos-delay="200" data-en="Proficient in Python, SQL, Power BI, and Excel. Experienced in data cleaning, exploratory analysis, and building interactive dashboards that drive decision-making and business growth." data-ar="بارع في بايثون، SQL، باور بي آي، وإكسل. أمتلك خبرة في تنظيف البيانات، التحليل الاستكشافي، وبناء لوحات تحكم تفاعلية تدعم اتخاذ القرار ونمو الأعمال.">
+                    Proficient in Python, SQL, Power BI, and Excel. Experienced in data cleaning, exploratory analysis, and building interactive dashboards that drive decision-making and business growth.
+                </p>
+
+                <div class="grid grid-cols-3 gap-4 pt-4 border-t border-brand-orange/30 max-w-lg" data-aos="fade-up" data-aos-delay="300">
+                    <div>
+                        <h4 class="text-3xl font-extrabold text-brand-orange"><span class="counter" data-target="15000">0</span>+</h4>
+                        <p class="text-xs font-extrabold uppercase tracking-wider dark:text-gray-400 text-gray-600" data-en="Rows Cleaned & Analyzed" data-ar="سطر بيانات تم تحليله">Rows Cleaned & Analyzed</p>
+                    </div>
+                    <div>
+                        <h4 class="text-3xl font-extrabold text-brand-orange"><span class="counter" data-target="10">0</span>+</h4>
+                        <p class="text-xs font-extrabold uppercase tracking-wider dark:text-gray-400 text-gray-600" data-en="Freelance Clients" data-ar="عميل مستقل">Freelance Clients</p>
+                    </div>
+                    <div>
+                        <h4 class="text-3xl font-extrabold text-brand-orange"><span class="counter" data-target="7">0</span>+</h4>
+                        <p class="text-xs font-extrabold uppercase tracking-wider dark:text-gray-400 text-gray-600" data-en="Major Projects" data-ar="مشروع رئيسي">Major Projects</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-4" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#projects" class="bg-brand-orange hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg transition-all">
+                        <span data-en="View Projects" data-ar="عرض المشاريع">View Projects</span> <i class="fa-solid fa-arrow-down ml-2"></i>
+                    </a>
+                    <a href="DA.Ibrahim_2.pdf" target="_blank" class="border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white px-8 py-3.5 rounded-xl font-bold transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-eye"></i> <span data-en="View Live CV" data-ar="عرض السيرة الذاتية">View Live CV</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 flex justify-center" data-aos="zoom-in" data-aos-delay="200">
+                <div class="relative group cursor-pointer" onclick="openGalleryModal(0)">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-orange to-yellow-500 rounded-3xl blur-xl opacity-40 group-hover:opacity-75 transition duration-1000 animate-pulse"></div>
+                    <img id="main-profile-img"
+                         src="3182fc42.jpeg.png" 
+                         alt="Ibrahim Al-Maadawi" 
+                         class="relative rounded-3xl w-80 h-96 sm:w-96 sm:h-[450px] object-cover object-top border-2 border-brand-orange/50 shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]" 
+                         onerror="this.onerror=null; this.src='watermarked_img_11082734328317066427.jpg';">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="relative z-10 py-24 px-6 lg:px-16 dark:bg-brand-dark/80 bg-white/60 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-brand-orange font-extrabold tracking-widest uppercase text-sm" data-en="Capabilities" data-ar="القدرات">Capabilities</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold mt-2 dark:text-white text-gray-900" data-en="Technical & Soft Skills" data-ar="المهارات التقنية والشخصية">Technical & Soft Skills</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center text-brand-orange text-2xl mb-6">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h4 class="text-xl font-extrabold mb-4 dark:text-white text-gray-900" data-en="Programming & Databases" data-ar="البرمجة وقواعد البيانات">Programming & Databases</h4>
+                    <ul class="space-y-3 font-bold dark:text-gray-200 text-gray-700">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Python (Pandas, NumPy)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> SQL Server / T-SQL</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Database Management</li>
+                    </ul>
+                </div>
+
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center text-brand-orange text-2xl mb-6">
+                        <i class="fa-chart-column fa-solid"></i>
+                    </div>
+                    <h4 class="text-xl font-extrabold mb-4 dark:text-white text-gray-900" data-en="Data Visualization & BI" data-ar="تصور البيانات و BI">Data Visualization & BI</h4>
+                    <ul class="space-y-3 font-bold dark:text-gray-200 text-gray-700">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Power BI (Interactive Dashboards)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Tableau</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Advanced Excel & Dashboards</li>
+                    </ul>
+                </div>
+
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center text-brand-orange text-2xl mb-6">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h4 class="text-xl font-extrabold mb-4 dark:text-white text-gray-900" data-en="Core & Soft Competencies" data-ar="المهارات الأساسية والشخصية">Core & Soft Competencies</h4>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="dark:bg-brand-border/60 bg-gray-100 font-bold dark:text-gray-200 text-gray-800 px-3 py-1 rounded-lg text-sm border border-brand-orange/20">Data Cleaning</span>
+                        <span class="dark:bg-brand-border/60 bg-gray-100 font-bold dark:text-gray-200 text-gray-800 px-3 py-1 rounded-lg text-sm border border-brand-orange/20">EDA Analysis</span>
+                        <span class="dark:bg-brand-border/60 bg-gray-100 font-bold dark:text-gray-200 text-gray-800 px-3 py-1 rounded-lg text-sm border border-brand-orange/20">Statistical Analysis</span>
+                        <span class="dark:bg-brand-border/60 bg-gray-100 font-bold dark:text-gray-200 text-gray-800 px-3 py-1 rounded-lg text-sm border border-brand-orange/20">Problem Solving</span>
+                        <span class="dark:bg-brand-border/60 bg-gray-100 font-bold dark:text-gray-200 text-gray-800 px-3 py-1 rounded-lg text-sm border border-brand-orange/20">Communication</span>
+                        <span class="dark:bg-brand-border/60 bg-gray-100 font-bold dark:text-gray-200 text-gray-800 px-3 py-1 rounded-lg text-sm border border-brand-orange/20">Teamwork</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Interactive Resume Viewer Section -->
+    <section id="experience" class="relative z-10 py-24 px-6 lg:px-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-brand-orange font-extrabold tracking-widest uppercase text-sm" data-en="Career Journey" data-ar="المسار المهني">Career Journey</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold mt-2 dark:text-white text-gray-900" data-en="Interactive Experience Viewer" data-ar="عارض الخبرات التفاعلي">Interactive Experience Viewer</h3>
+                <p class="text-sm font-semibold dark:text-gray-400 text-gray-600 mt-2" data-en="Filter through my professional history and key roles dynamically." data-ar="ابحث وفلتر بين خبراتي وأدواري الاحترافية ديناميكياً."></p>
+            </div>
+
+            <!-- Resume Filters / Search -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-10" data-aos="fade-up">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="filterExperience('all')" class="exp-filter-btn px-5 py-2 rounded-full font-bold text-sm bg-brand-orange text-white transition-all shadow-md" data-en="All Roles" data-ar="كل الأدوار">All Roles</button>
+                    <button onclick="filterExperience('internship')" class="exp-filter-btn px-5 py-2 rounded-full font-bold text-sm dark:bg-brand-card bg-white dark:text-gray-300 text-gray-700 border border-brand-orange/40 transition-all shadow-md" data-en="Internships" data-ar="التدريب">Internships</button>
+                    <button onclick="filterExperience('freelance')" class="exp-filter-btn px-5 py-2 rounded-full font-bold text-sm dark:bg-brand-card bg-white dark:text-gray-300 text-gray-700 border border-brand-orange/40 transition-all shadow-md" data-en="Freelance" data-ar="العمل الحر">Freelance</button>
+                </div>
+                <div class="w-full sm:w-auto">
+                    <input type="text" id="resume-search" oninput="searchResume()" placeholder="Search roles, tools..." class="w-full sm:w-72 dark:bg-brand-card bg-white border dark:border-brand-border border-gray-300 rounded-xl px-4 py-2.5 text-sm dark:text-white text-gray-900 focus:outline-none focus:border-brand-orange">
+                </div>
+            </div>
+
+            <div id="experience-container" class="space-y-8">
+                <!-- Exp 1 -->
+                <div class="experience-card dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md" data-category="internship" data-aos="fade-right">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
+                        <div>
+                            <h4 class="text-2xl font-extrabold dark:text-white text-gray-900">Business Intelligence Project Intern</h4>
+                            <p class="text-brand-orange font-bold">Digital Egypt Pioneers Initiative (DEPI) | Data Analyst</p>
+                        </div>
+                        <span class="bg-brand-orange/10 border border-brand-orange/30 text-brand-orange px-4 py-1.5 rounded-full text-xs font-bold">DEPI Internship</span>
+                    </div>
+                    <ul class="list-disc list-inside font-bold dark:text-gray-300 text-gray-600 space-y-2 leading-relaxed">
+                        <li>Engineered and deployed the <span class="font-extrabold dark:text-white text-gray-900">Trek BI Portal</span>, successfully integrating 3+ AI and business intelligence modules into a unified platform.</li>
+                        <li>Collaborated closely with a cross-functional team across the complete project lifecycle, from raw data engineering to final production deployment.</li>
+                        <li>Developed and extracted 5+ core Key Performance Indicators (KPIs) aligned directly with strategic business objectives.</li>
+                    </ul>
+                </div>
+
+                <!-- Exp 2 -->
+                <div class="experience-card dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md" data-category="freelance" data-aos="fade-left">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-2">
+                        <div>
+                            <h4 class="text-2xl font-extrabold dark:text-white text-gray-900">Freelancer - Data Analyst</h4>
+                            <p class="text-brand-orange font-bold">Nafazly, Khamsat, Mostaql Platforms</p>
+                        </div>
+                        <span class="bg-brand-orange/10 border border-brand-orange/30 text-brand-orange px-4 py-1.5 rounded-full text-xs font-bold">Freelance Work</span>
+                    </div>
+                    <ul class="list-disc list-inside font-bold dark:text-gray-300 text-gray-600 space-y-2 leading-relaxed">
+                        <li>Delivered high-impact data analytics solutions to 10+ clients, achieving a 100% success rate in data accuracy and reporting.</li>
+                        <li>Streamlined data preprocessing pipelines using Python (Pandas), reducing data cleaning time for 15,000+ rows of raw data.</li>
+                        <li>Built and designed interactive dashboards using Power BI to support client decision-making and business growth.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="relative z-10 py-24 px-6 lg:px-16 dark:bg-brand-dark/80 bg-white/60 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-brand-orange font-extrabold tracking-widest uppercase text-sm" data-en="Portfolio Showcase" data-ar="معرض الأعمال">Portfolio Showcase</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold mt-2 dark:text-white text-gray-900" data-en="Featured Data Projects" data-ar="المشاريع البارزة">Featured Data Projects</h3>
+                <p class="text-sm font-semibold text-gray-500 mt-2" data-en="Click any card to view detailed tools, visual dashboards, and business impacts." data-ar="انقر فوق أي بطاقة لعرض الأدوات التفصيلية ولوحات التحكم وتأثير الأعمال."></p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up">
+                <button onclick="filterProjects('all', event)" class="filter-btn active-filter px-5 py-2 rounded-full font-bold text-sm bg-brand-orange text-white transition-all shadow-md" data-en="All" data-ar="الكل">All</button>
+                <button onclick="filterProjects('python', event)" class="filter-btn px-5 py-2 rounded-full font-bold text-sm dark:bg-brand-card bg-white dark:text-gray-300 text-gray-700 border border-brand-orange/40 transition-all shadow-md" data-en="Python & EDA" data-ar="بايثون وتحليل">Python & EDA</button>
+                <button onclick="filterProjects('powerbi', event)" class="filter-btn px-5 py-2 rounded-full font-bold text-sm dark:bg-brand-card bg-white dark:text-gray-300 text-gray-700 border border-brand-orange/40 transition-all shadow-md" data-en="Power BI & BI" data-ar="باور بي آي">Power BI & BI</button>
+                <button onclick="filterProjects('sql', event)" class="filter-btn px-5 py-2 rounded-full font-bold text-sm dark:bg-brand-card bg-white dark:text-gray-300 text-gray-700 border border-brand-orange/40 transition-all shadow-md" data-en="SQL & Excel" data-ar="SQL وإكسل">SQL & Excel</button>
+                <button onclick="filterProjects('research', event)" class="filter-btn px-5 py-2 rounded-full font-bold text-sm dark:bg-brand-card bg-white dark:text-gray-300 text-gray-700 border border-brand-orange/40 transition-all shadow-md" data-en="Research & Statistics" data-ar="أبحاث وإحصاء">Research & Statistics</button>
+            </div>
+
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div onclick="openProjectModal('Global BMW Sales Analysis', 'Python & Pandas', 'Processed and analyzed 6+ years of global BMW car sales data (2018-2025) using Python (Pandas), extracting strategic growth patterns and identifying top-performing vehicle models.', 'Python, Pandas, Data Visualization', 'Handling multi-year consistency and normalizing global vehicle configurations.', 'Extracted key strategic growth patterns and top vehicle performance metrics.', 'https://github.com/almdawyabrahym0-pixel', 'https://images.unsplash.com/photo-1555215695-3004980adade?q=80&w=600&auto=format&fit=crop', 'Growth Insights')" class="project-card cursor-pointer dark:bg-brand-card/90 bg-white rounded-2xl border dark:border-brand-border border-gray-200 p-6 box-glow transition-all flex flex-col justify-between shadow-xl backdrop-blur-md" data-category="python" data-aos="zoom-in" data-aos-delay="100">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full">Python & Pandas</span>
+                            <i class="fa-solid fa-car text-brand-orange text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-3 dark:text-white text-gray-900">Global BMW Sales Analysis</h4>
+                        <p class="font-bold text-sm leading-relaxed dark:text-gray-300 text-gray-600 mb-6">Processed and analyzed 6+ years of global BMW car sales data (2018-2025) using Python, extracting strategic growth patterns.</p>
+                    </div>
+                    <div class="pt-4 border-t dark:border-brand-border/60 border-gray-200 flex items-center justify-between">
+                        <span class="text-sm font-bold text-brand-orange hover:underline flex items-center gap-1.5"><i class="fa-solid fa-circle-info"></i> View Details</span>
+                        <span class="text-xs font-semibold text-gray-400">2026</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div onclick="openProjectModal('Spotify App Data Analysis', 'Python & Data Wrangling', 'Explored and cleaned large-scale user listening behavior datasets on Spotify using Python, uncovering key streaming patterns to enhance audience preference insights by 20%.', 'Python, Data Wrangling, Pandas', 'Processing dense, unstructured user streaming behavior logs.', 'Enhanced audience preference insights accuracy by 20%.', 'https://github.com/almdawyabrahym0-pixel', 'https://images.unsplash.com/photo-1614680376593-902f749f7ffc?q=80&w=600&auto=format&fit=crop', '+20% Insight Accuracy')" class="project-card cursor-pointer dark:bg-brand-card/90 bg-white rounded-2xl border dark:border-brand-border border-gray-200 p-6 box-glow transition-all flex flex-col justify-between shadow-xl backdrop-blur-md" data-category="python" data-aos="zoom-in" data-aos-delay="200">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full">Python & Wrangling</span>
+                            <i class="fa-brands fa-spotify text-brand-orange text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-3 dark:text-white text-gray-900">Spotify App Data Analysis</h4>
+                        <p class="font-bold text-sm leading-relaxed dark:text-gray-300 text-gray-600 mb-6">Explored and cleaned large-scale user listening behavior datasets on Spotify using Python, uncovering key streaming patterns.</p>
+                    </div>
+                    <div class="pt-4 border-t dark:border-brand-border/60 border-gray-200 flex items-center justify-between">
+                        <span class="text-sm font-bold text-brand-orange hover:underline flex items-center gap-1.5"><i class="fa-solid fa-circle-info"></i> View Details</span>
+                        <span class="text-xs font-semibold text-gray-400">2026</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div onclick="openProjectModal('International School Performance Dashboard', 'Power BI & BI', 'Designed and developed an interactive Power BI dashboard to track student and institutional performance metrics, translating complex educational data into 5+ actionable key performance indicators (KPIs).', 'Power BI, Business Intelligence', 'Harmonizing multi-department academic scores into a streamlined executive view.', 'Translated complex educational records into 5+ actionable KPIs.', 'https://github.com/almdawyabrahym0-pixel', 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop', '5+ Actionable KPIs')" class="project-card cursor-pointer dark:bg-brand-card/90 bg-white rounded-2xl border dark:border-brand-border border-gray-200 p-6 box-glow transition-all flex flex-col justify-between shadow-xl backdrop-blur-md" data-category="powerbi" data-aos="zoom-in" data-aos-delay="300">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full">Power BI</span>
+                            <i class="fa-solid fa-graduation-cap text-brand-orange text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-3 dark:text-white text-gray-900">International School Dashboard</h4>
+                        <p class="font-bold text-sm leading-relaxed dark:text-gray-300 text-gray-600 mb-6">Designed and developed an interactive Power BI dashboard to track student and institutional performance metrics.</p>
+                    </div>
+                    <div class="pt-4 border-t dark:border-brand-border/60 border-gray-200 flex items-center justify-between">
+                        <span class="text-sm font-bold text-brand-orange hover:underline flex items-center gap-1.5"><i class="fa-solid fa-circle-info"></i> View Details</span>
+                        <span class="text-xs font-semibold text-gray-400">2026</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div onclick="openProjectModal('Chocolate Sales Analysis', 'SQL & Excel', 'Analyzed the end-to-end sales lifecycle of a chocolate company using advanced SQL queries and Excel, evaluating product profitability to support data-driven sales strategies.', 'SQL, Advanced Excel, Data Analytics', 'Querying complex relational transactions across multi-regional distribution points.', 'Evaluated product profitability to directly support high-level sales strategies.', 'https://github.com/almdawyabrahym0-pixel', 'https://images.unsplash.com/photo-1548907040-4baa42d10919?q=80&w=600&auto=format&fit=crop', 'Profitability Insights')" class="project-card cursor-pointer dark:bg-brand-card/90 bg-white rounded-2xl border dark:border-brand-border border-gray-200 p-6 box-glow transition-all flex flex-col justify-between shadow-xl backdrop-blur-md" data-category="sql" data-aos="zoom-in" data-aos-delay="100">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full">SQL & Excel</span>
+                            <i class="fa-solid fa-chart-line text-brand-orange text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-3 dark:text-white text-gray-900">Chocolate Sales Analysis</h4>
+                        <p class="font-bold text-sm leading-relaxed dark:text-gray-300 text-gray-600 mb-6">Analyzed the end-to-end sales lifecycle of a chocolate company using advanced SQL queries and Excel, evaluating product profitability.</p>
+                    </div>
+                    <div class="pt-4 border-t dark:border-brand-border/60 border-gray-200 flex items-center justify-between">
+                        <span class="text-sm font-bold text-brand-orange hover:underline flex items-center gap-1.5"><i class="fa-solid fa-circle-info"></i> View Details</span>
+                        <span class="text-xs font-semibold text-gray-400">2026</span>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div onclick="openProjectModal('AI Tools Market Analysis', 'Market Research & Analytics', 'Conducted a comprehensive market study comparing the capabilities of 10+ emerging artificial intelligence tools, extracting technological trends and market growth trajectories.', 'Data Research, Market Analytics, Benchmarking', 'Aggregating unstructured feature specs across rapidly evolving software releases.', 'Extracted core technological market trends and growth trajectories.', 'https://github.com/almdawyabrahym0-pixel', 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=600&auto=format&fit=crop', '10+ Tools Benchmarked')" class="project-card cursor-pointer dark:bg-brand-card/90 bg-white rounded-2xl border dark:border-brand-border border-gray-200 p-6 box-glow transition-all flex flex-col justify-between shadow-xl backdrop-blur-md" data-category="research" data-aos="zoom-in" data-aos-delay="200">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full">Market Research</span>
+                            <i class="fa-solid fa-brain text-brand-orange text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-3 dark:text-white text-gray-900">AI Tools Market Analysis</h4>
+                        <p class="font-bold text-sm leading-relaxed dark:text-gray-300 text-gray-600 mb-6">Conducted a comprehensive market study comparing the capabilities of 10+ emerging artificial intelligence tools.</p>
+                    </div>
+                    <div class="pt-4 border-t dark:border-brand-border/60 border-gray-200 flex items-center justify-between">
+                        <span class="text-sm font-bold text-brand-orange hover:underline flex items-center gap-1.5"><i class="fa-solid fa-circle-info"></i> View Details</span>
+                        <span class="text-xs font-semibold text-gray-400">2026</span>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div onclick="openProjectModal('World Cup 2026 Data Analysis', 'Statistical Analysis', 'Performed statistical analysis on World Cup match datasets, extracting vital performance indicators for teams and players to summarize competitive outcomes analytically.', 'Statistical Analysis, Data Interpretation', 'Processing vast historical tournament records under statistical parameters.', 'Summarized competitive team and player outcomes analytically.', 'https://github.com/almdawyabrahym0-pixel', 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600&auto=format&fit=crop', 'Performance Metrics')" class="project-card cursor-pointer dark:bg-brand-card/90 bg-white rounded-2xl border dark:border-brand-border border-gray-200 p-6 box-glow transition-all flex flex-col justify-between shadow-xl backdrop-blur-md" data-category="research" data-aos="zoom-in" data-aos-delay="300">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full">Statistical Analysis</span>
+                            <i class="fa-solid fa-futbol text-brand-orange text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-3 dark:text-white text-gray-900">World Cup 2026 Data Analysis</h4>
+                        <p class="font-bold text-sm leading-relaxed dark:text-gray-300 text-gray-600 mb-6">Performed statistical analysis on World Cup match datasets, extracting vital performance indicators for teams and players.</p>
+                    </div>
+                    <div class="pt-4 border-t dark:border-brand-border/60 border-gray-200 flex items-center justify-between">
+                        <span class="text-sm font-bold text-brand-orange hover:underline flex items-center gap-1.5"><i class="fa-solid fa-circle-info"></i> View Details</span>
+                        <span class="text-xs font-semibold text-gray-400">2026</span>
+                    </div>
+                </div>
+
+                <!-- Project 7 -->
+                <div onclick="openProjectModal('Social Pulse: Teen Mental Health', 'Social Media Analytics & Statistics', 'Delivered an analytical study exploring the impact of social media on adolescent mental health by linking 1,000+ statistical records to behavioral patterns, driving awareness-raising conclusions.', 'Social Media Analytics, Statistical Insight', 'Correlating delicate qualitative social trends with hard statistical records.', 'Linked 1,000+ records to behavioral patterns, driving impactful conclusions.', 'https://github.com/almdawyabrahym0-pixel', 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop', '1,000+ Records Analyzed')" class="project-card cursor-pointer dark:bg-brand-card/90 bg-white rounded-2xl border dark:border-brand-border border-gray-200 p-6 box-glow transition-all flex flex-col justify-between shadow-xl backdrop-blur-md" data-category="research" data-aos="zoom-in" data-aos-delay="100">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full">Social Analytics</span>
+                            <i class="fa-solid fa-heart-pulse text-brand-orange text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-3 dark:text-white text-gray-900">Social Pulse: Teen Mental Health</h4>
+                        <p class="font-bold text-sm leading-relaxed dark:text-gray-300 text-gray-600 mb-6">Delivered an analytical study exploring the impact of social media on adolescent mental health by linking 1,000+ records.</p>
+                    </div>
+                    <div class="pt-4 border-t dark:border-brand-border/60 border-gray-200 flex items-center justify-between">
+                        <span class="text-sm font-bold text-brand-orange hover:underline flex items-center gap-1.5"><i class="fa-solid fa-circle-info"></i> View Details</span>
+                        <span class="text-xs font-semibold text-gray-400">2026</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW ADDITION 1: Certifications & Badges Section -->
+    <section id="certs" class="relative z-10 py-24 px-6 lg:px-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-brand-orange font-extrabold tracking-widest uppercase text-sm" data-en="Verified Credentials" data-ar="الاعتمادات الموثقة">Verified Credentials</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold mt-2 dark:text-white text-gray-900" data-en="Certifications & Badges" data-ar="الشهادات والشارات">Certifications & Badges</h3>
+                <p class="text-sm font-semibold text-gray-500 mt-2" data-en="Official certifications verifying technical expertise and professional training." data-ar="شهادات رسمية توثق الخبرة التقنية والتدريب المهني."></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Cert 1 -->
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center text-brand-orange text-2xl">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <span class="text-xs font-bold bg-green-500/10 text-green-400 border border-green-500/30 px-3 py-1 rounded-full">Verified</span>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-2 dark:text-white text-gray-900">DEPI Data Analytics & BI Graduate</h4>
+                        <p class="text-brand-orange font-bold text-sm mb-4">Digital Egypt Pioneers Initiative</p>
+                        <p class="font-bold text-sm dark:text-gray-300 text-gray-600 mb-6">Completed intensive professional training path covering data engineering, Power BI dashboards, and Python pipelines.</p>
+                    </div>
+                    <a href="https://linkedin.com/in/ibrahim-al-maadawi-400825404" target="_blank" class="w-full text-center border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white font-bold py-2.5 rounded-xl text-sm transition-all shadow-sm">
+                        Verify Certificate <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center text-brand-orange text-2xl">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            <span class="text-xs font-bold bg-green-500/10 text-green-400 border border-green-500/30 px-3 py-1 rounded-full">Verified</span>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-2 dark:text-white text-gray-900">Python for Data Science</h4>
+                        <p class="text-brand-orange font-bold text-sm mb-4">Coursera / Authorized Platform</p>
+                        <p class="font-bold text-sm dark:text-gray-300 text-gray-600 mb-6">Mastered data manipulation libraries including Pandas and NumPy, exploratory data analysis, and script optimization.</p>
+                    </div>
+                    <a href="https://github.com/almdawyabrahym0-pixel" target="_blank" class="w-full text-center border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white font-bold py-2.5 rounded-xl text-sm transition-all shadow-sm">
+                        Verify Certificate <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center text-brand-orange text-2xl">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                            <span class="text-xs font-bold bg-green-500/10 text-green-400 border border-green-500/30 px-3 py-1 rounded-full">Verified</span>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-2 dark:text-white text-gray-900">Advanced Power BI Dashboards</h4>
+                        <p class="text-brand-orange font-bold text-sm mb-4">Professional Training Track</p>
+                        <p class="font-bold text-sm dark:text-gray-300 text-gray-600 mb-6">Specialized credential focusing on DAX formulas, data modeling, and enterprise reporting solutions.</p>
+                    </div>
+                    <a href="https://linkedin.com/in/ibrahim-al-maadawi-400825404" target="_blank" class="w-full text-center border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white font-bold py-2.5 rounded-xl text-sm transition-all shadow-sm">
+                        Verify Certificate <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW ADDITION 2: GitHub Activity Feed Section -->
+    <section id="github-feed" class="relative z-10 py-24 px-6 lg:px-16 dark:bg-brand-dark/80 bg-white/60 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-brand-orange font-extrabold tracking-widest uppercase text-sm" data-en="Open Source Activity" data-ar="نشاط المصادر المفتوحة">Open Source Activity</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold mt-2 dark:text-white text-gray-900" data-en="Recent GitHub Commits & Updates" data-ar="أحدث نشاطات جيت هاب">Recent GitHub Commits & Updates</h3>
+                <p class="text-sm font-semibold text-gray-500 mt-2" data-en="Live feed reflecting real-time programming contributions and repository updates." data-ar="تحديثات حية تعكس المساهمات البرمجية ومستودعات الأكواد."></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="dark:bg-brand-card/90 bg-white p-6 rounded-2xl border dark:border-brand-border border-gray-200 box-glow shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange px-3 py-1 rounded-full">Commit</span>
+                        <span class="text-xs font-semibold text-gray-400">2 hours ago</span>
+                    </div>
+                    <h4 class="font-extrabold text-base dark:text-white text-gray-900 mb-2">Global BMW Sales Dataset</h4>
+                    <p class="text-xs font-bold dark:text-gray-300 text-gray-600 mb-4">Optimized data cleaning scripts with Pandas and updated visualization export parameters.</p>
+                    <a href="https://github.com/almdawyabrahym0-pixel" target="_blank" class="text-xs font-bold text-brand-orange hover:underline flex items-center gap-1">
+                        <i class="fa-brands fa-github"></i> View Repository
+                    </a>
+                </div>
+
+                <div class="dark:bg-brand-card/90 bg-white p-6 rounded-2xl border dark:border-brand-border border-gray-200 box-glow shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange px-3 py-1 rounded-full">Repository Update</span>
+                        <span class="text-xs font-semibold text-gray-400">1 day ago</span>
+                    </div>
+                    <h4 class="font-extrabold text-base dark:text-white text-gray-900 mb-2">Spotify App EDA Pipeline</h4>
+                    <p class="text-xs font-bold dark:text-gray-300 text-gray-600 mb-4">Added exploratory correlation matrices and user listening behavior graphs.</p>
+                    <a href="https://github.com/almdawyabrahym0-pixel" target="_blank" class="text-xs font-bold text-brand-orange hover:underline flex items-center gap-1">
+                        <i class="fa-brands fa-github"></i> View Repository
+                    </a>
+                </div>
+
+                <div class="dark:bg-brand-card/90 bg-white p-6 rounded-2xl border dark:border-brand-border border-gray-200 box-glow shadow-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange px-3 py-1 rounded-full">New Branch</span>
+                        <span class="text-xs font-semibold text-gray-400">3 days ago</span>
+                    </div>
+                    <h4 class="font-extrabold text-base dark:text-white text-gray-900 mb-2">Trek BI Portal Integration</h4>
+                    <p class="text-xs font-bold dark:text-gray-300 text-gray-600 mb-4">Configured deployment pipelines and key business performance metrics modules.</p>
+                    <a href="https://github.com/almdawyabrahym0-pixel" target="_blank" class="text-xs font-bold text-brand-orange hover:underline flex items-center gap-1">
+                        <i class="fa-brands fa-github"></i> View Repository
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW ADDITION 3: Data Blog & Insights Section -->
+    <section id="blog" class="relative z-10 py-24 px-6 lg:px-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-brand-orange font-extrabold tracking-widest uppercase text-sm" data-en="Technical Insights" data-ar="رؤى تقنية">Technical Insights</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold mt-2 dark:text-white text-gray-900" data-en="Data Blog & Case Studies" data-ar="المدونة التقنية ودراسات الحالة">Data Blog & Case Studies</h3>
+                <p class="text-sm font-semibold text-gray-500 mt-2" data-en="Short articles and case studies highlighting practical problem-solving methodologies." data-ar="مقالات قصيرة ودراسات حالة تسلط الضوء على منهجيات حل المشكلات."></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Blog 1 -->
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full">Data Cleaning</span>
+                            <span class="text-xs font-semibold text-gray-400">5 min read</span>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-3 dark:text-white text-gray-900">How to Handle Missing Values in Large Datasets Using Pandas</h4>
+                        <p class="font-bold text-sm leading-relaxed dark:text-gray-300 text-gray-600 mb-6">A practical breakdown of imputation strategies, forward-fill techniques, and anomaly filtering when working with thousands of raw records.</p>
+                    </div>
+                    <div class="pt-4 border-t dark:border-brand-border/60 border-gray-200 flex items-center justify-between">
+                        <span class="text-xs font-bold text-brand-orange">Ibrahim Al-Maadawi</span>
+                        <a href="#contact" class="text-sm font-bold text-brand-orange hover:underline flex items-center gap-1">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full">Business Intelligence</span>
+                            <span class="text-xs font-semibold text-gray-400">7 min read</span>
+                        </div>
+                        <h4 class="text-xl font-extrabold mb-3 dark:text-white text-gray-900">Designing Actionable KPIs in Power BI for Executive Decisions</h4>
+                        <p class="font-bold text-sm leading-relaxed dark:text-gray-300 text-gray-600 mb-6">Exploring how to transform raw metrics into intuitive executive dashboards that directly accelerate business growth and clarity.</p>
+                    </div>
+                    <div class="pt-4 border-t dark:border-brand-border/60 border-gray-200 flex items-center justify-between">
+                        <span class="text-xs font-bold text-brand-orange">Ibrahim Al-Maadawi</span>
+                        <a href="#contact" class="text-sm font-bold text-brand-orange hover:underline flex items-center gap-1">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="relative z-10 py-24 px-6 lg:px-16 dark:bg-brand-dark/80 bg-white/60 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-brand-orange font-extrabold tracking-widest uppercase text-sm" data-en="Client Feedback" data-ar="آراء العملاء">Client Feedback</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold mt-2 dark:text-white text-gray-900" data-en="What Clients Say" data-ar="ماذا يقول العملاء">What Clients Say</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex text-yellow-400 mb-4 text-sm gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-bold dark:text-gray-300 text-gray-600 text-sm leading-relaxed mb-6">"Ibrahim cleaned and organized our sales data fast and accurately. The Power BI dashboard made tracking top products seamless."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-orange/20 border border-brand-orange flex items-center justify-center text-brand-orange font-extrabold text-sm">MK</div>
+                        <div>
+                            <h4 class="dark:text-white text-gray-900 font-extrabold text-sm">Mostafa K.</h4>
+                            <p class="text-xs text-brand-orange font-bold">Khamsat Client</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex text-yellow-400 mb-4 text-sm gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-bold dark:text-gray-300 text-gray-600 text-sm leading-relaxed mb-6">"High commitment to deadlines and great technical execution using Python. Solved data formatting issues cleanly."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-orange/20 border border-brand-orange flex items-center justify-center text-brand-orange font-extrabold text-sm">AH</div>
+                        <div>
+                            <h4 class="dark:text-white text-gray-900 font-extrabold text-sm">Ahmed H.</h4>
+                            <p class="text-xs text-brand-orange font-bold">Mostaql Client</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dark:bg-brand-card/90 bg-white p-8 rounded-2xl border dark:border-brand-border border-gray-200 box-glow transition-all shadow-xl backdrop-blur-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex text-yellow-400 mb-4 text-sm gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-bold dark:text-gray-300 text-gray-600 text-sm leading-relaxed mb-6">"Professional communication and insightful analytical skills. Turned raw Excel spreadsheets into a strategic asset."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-orange/20 border border-brand-orange flex items-center justify-center text-brand-orange font-extrabold text-sm">SA</div>
+                        <div>
+                            <h4 class="dark:text-white text-gray-900 font-extrabold text-sm">Samy A.</h4>
+                            <p class="text-xs text-brand-orange font-bold">Nafazly Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Contact -->
+    <footer id="contact" class="relative z-10 border-t dark:border-brand-border border-gray-200 dark:bg-brand-dark/90 bg-white/90 backdrop-blur-md pt-20 pb-12 px-6 lg:px-16">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+            <div class="space-y-6 text-center lg:text-left" data-aos="fade-right">
+                <h3 class="text-3xl sm:text-4xl font-extrabold dark:text-white text-gray-900" data-en="Let's Connect & Build Something Great" data-ar="لنتبادل التواصل ونبني شيئاً عظيماً">Let's Connect & Build Something Great</h3>
+                <p class="font-bold max-w-lg dark:text-gray-300 text-gray-600 leading-relaxed" data-en="Open for freelance data projects, full-time opportunities, or insightful discussions about data analytics. Send me a message using the form or reach out directly." data-ar="متاح لمشاريع البيانات المستقلة، الفرص بدوام كامل، أو النقاشات التحليلية. أرسل لي رسالة أو تواصل معي مباشرة.">Open for freelance data projects, full-time opportunities, or insightful discussions about data analytics. Send me a message using the form or reach out directly.</p>
+                <div class="flex justify-center lg:justify-start flex-wrap gap-4 text-xl items-center pt-2">
+                    <div class="relative group">
+                        <button onclick="copyEmail()" class="w-12 h-12 rounded-full dark:bg-brand-card bg-gray-100 border dark:border-brand-border border-gray-300 text-brand-orange flex items-center justify-center hover:bg-brand-orange hover:text-white transition-all shadow-md">
+                            <i class="fa-solid fa-envelope"></i>
+                        </button>
+                        <span id="copy-tooltip" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-brand-orange text-white text-xs font-bold py-1 px-3 rounded opacity-0 transition-opacity pointer-events-none whitespace-nowrap shadow-lg">Copied!</span>
+                    </div>
+                    <a href="https://linkedin.com/in/ibrahim-al-maadawi-400825404" target="_blank" class="w-12 h-12 rounded-full dark:bg-brand-card bg-gray-100 border dark:border-brand-border border-gray-300 text-brand-orange flex items-center justify-center hover:bg-brand-orange hover:text-white transition-all shadow-md"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://github.com/almdawyabrahym0-pixel" target="_blank" class="w-12 h-12 rounded-full dark:bg-brand-card bg-gray-100 border dark:border-brand-border border-gray-300 text-brand-orange flex items-center justify-center hover:bg-brand-orange hover:text-white transition-all shadow-md"><i class="fa-brands fa-github"></i></a>
+                    <a href="tel:01016187009" class="w-12 h-12 rounded-full dark:bg-brand-card bg-gray-100 border dark:border-brand-border border-gray-300 text-brand-orange flex items-center justify-center hover:bg-brand-orange hover:text-white transition-all shadow-md"><i class="fa-solid fa-phone"></i></a>
+                    <a href="https://wa.me/201016187009" target="_blank" class="w-12 h-12 rounded-full dark:bg-brand-card bg-gray-100 border dark:border-brand-border border-gray-300 text-brand-orange flex items-center justify-center hover:bg-brand-orange hover:text-white transition-all shadow-md"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="dark:bg-brand-card/90 bg-white p-8 rounded-3xl border dark:border-brand-border border-gray-200 shadow-2xl space-y-4 backdrop-blur-md" data-aos="fade-left">
+                <h4 class="text-xl font-extrabold dark:text-white text-gray-900 mb-2" data-en="Send Me a Message" data-ar="أرسل لي رسالة">Send Me a Message</h4>
+                <form onsubmit="sendToWhatsApp(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase dark:text-gray-300 text-gray-700 mb-1" data-en="Your Name" data-ar="اسمك">Your Name</label>
+                        <input type="text" id="whatsapp-name" required class="w-full dark:bg-brand-dark bg-gray-50 border dark:border-brand-border border-gray-300 rounded-xl px-4 py-3 dark:text-white text-gray-900 text-sm focus:outline-none focus:border-brand-orange" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase dark:text-gray-300 text-gray-700 mb-1" data-en="Your Email" data-ar="بريدك الإلكتروني">Your Email</label>
+                        <input type="email" id="whatsapp-email" required class="w-full dark:bg-brand-dark bg-gray-50 border dark:border-brand-border border-gray-300 rounded-xl px-4 py-3 dark:text-white text-gray-900 text-sm focus:outline-none focus:border-brand-orange" placeholder="john@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase dark:text-gray-300 text-gray-700 mb-1" data-en="Message" data-ar="الرسالة">Message</label>
+                        <textarea id="whatsapp-message" rows="4" required class="w-full dark:bg-brand-dark bg-gray-50 border dark:border-brand-border border-gray-300 rounded-xl px-4 py-3 dark:text-white text-gray-900 text-sm focus:outline-none focus:border-brand-orange" placeholder="Hi Ibrahim, I would like to discuss a project..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-orange hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl text-sm transition-all shadow-lg flex items-center justify-center gap-2">
+                        <span data-en="Send via WhatsApp" data-ar="الإرسال عبر واتساب">Send via WhatsApp</span> <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto text-center pt-8 border-t dark:border-brand-border/40 border-gray-200">
+            <p class="font-bold text-sm text-gray-400">&copy; 2026 Ibrahim Al-Maadawi. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Gallery Modal -->
+    <div id="gallery-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md hidden px-4 select-none">
+        <button onclick="closeGalleryModal()" class="absolute top-5 right-5 text-white hover:text-brand-orange text-3xl font-bold z-50 p-2 transition-colors">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        
+        <button onclick="prevGalleryImage()" class="absolute left-4 sm:left-8 text-white hover:text-brand-orange text-3xl font-bold z-50 p-4 transition-colors">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        
+        <button onclick="nextGalleryImage()" class="absolute right-4 sm:right-8 text-white hover:text-brand-orange text-3xl font-bold z-50 p-4 transition-colors">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div class="max-w-4xl max-h-[85vh] flex flex-col items-center justify-center">
+            <img id="gallery-img" 
+                 src="" 
+                 alt="Gallery Preview" 
+                 class="max-w-full max-h-[70vh] object-contain rounded-2xl border-2 border-brand-orange/40 shadow-2xl transition-all duration-300"
+                 onerror="this.onerror=null; this.src=galleryImages[currentGalleryIndex].fallback;">
+            <p id="gallery-caption" class="text-white text-center font-extrabold mt-4 text-base sm:text-lg tracking-wide bg-slate-900/80 px-6 py-2 rounded-full border border-brand-orange/30"></p>
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden px-4">
+        <div class="dark:bg-brand-card bg-white border border-brand-orange/40 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-8 relative shadow-2xl space-y-6 dark:text-white text-gray-900" data-aos="zoom-in">
+            <button onclick="closeProjectModal()" class="absolute top-5 right-5 text-gray-400 hover:text-brand-orange text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="rounded-2xl overflow-hidden border dark:border-brand-border border-gray-200 max-h-56">
+                <img id="modal-img" src="" alt="Project Preview" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop';">
+            </div>
+
+            <div>
+                <div class="flex justify-between items-center">
+                    <span id="modal-category" class="text-xs font-bold bg-brand-orange/10 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full"></span>
+                    <span id="modal-impact" class="text-xs font-extrabold text-green-400 border border-green-500/30 bg-green-500/10 px-3 py-1 rounded-full"></span>
+                </div>
+                <h3 id="modal-title" class="text-2xl font-extrabold mt-3"></h3>
+            </div>
+            <p id="modal-desc" class="dark:text-gray-300 text-gray-600 font-bold text-sm leading-relaxed"></p>
+            <div class="space-y-3 pt-2 border-t dark:border-brand-border border-gray-200">
+                <p class="text-sm font-bold"><strong class="text-brand-orange">Tools Used:</strong> <span id="modal-tools" class="dark:text-gray-200 text-gray-700"></span></p>
+                <p class="text-sm font-bold"><strong class="text-brand-orange">Key Challenge:</strong> <span id="modal-challenge" class="dark:text-gray-200 text-gray-700"></span></p>
+                <p class="text-sm font-bold"><strong class="text-brand-orange">Solution / Impact:</strong> <span id="modal-solution" class="dark:text-gray-200 text-gray-700"></span></p>
+            </div>
+            <div class="pt-4 flex justify-end gap-4">
+                <a id="modal-link" href="#" target="_blank" class="bg-brand-orange hover:bg-orange-600 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-all shadow-md flex items-center gap-2">
+                    <i class="fa-brands fa-github"></i> Visit Repository
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // Theme Toggle Function
+        let currentTheme = 'dark';
+        function toggleTheme() {
+            const htmlRoot = document.getElementById('html-root');
+            const themeIcon = document.getElementById('theme-icon');
+            if (htmlRoot.classList.contains('dark')) {
+                htmlRoot.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-moon';
+                currentTheme = 'light';
+            } else {
+                htmlRoot.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun';
+                currentTheme = 'dark';
+            }
+        }
+
+        // Language Toggle Function (EN / AR)
+        let currentLang = 'en';
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            document.getElementById('lang-label').innerText = currentLang === 'en' ? 'عربي' : 'EN';
+            document.getElementById('html-root').setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            
+            const elements = document.querySelectorAll('[data-en]');
+            elements.forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) el.innerText = text;
+            });
+        }
+
+        // Interactive Resume Filter & Search
+        function filterExperience(category) {
+            const cards = document.querySelectorAll('.experience-card');
+            const buttons = document.querySelectorAll('.exp-filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-orange', 'text-white');
+                btn.classList.add('dark:bg-brand-card', 'bg-white', 'dark:text-gray-300', 'text-gray-700');
+            });
+
+            event.currentTarget.classList.remove('dark:bg-brand-card', 'bg-white', 'dark:text-gray-300', 'text-gray-700');
+            event.currentTarget.classList.add('bg-brand-orange', 'text-white');
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function searchResume() {
+            const query = document.getElementById('resume-search').value.toLowerCase();
+            const cards = document.querySelectorAll('.experience-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        const galleryImages = [
+            { 
+                src: '3182fc42.jpeg.png', 
+                fallback: 'watermarked_img_11082734328317066427.jpg', 
+                caption: 'Ibrahim Al-Maadawi - Main Professional Picture' 
+            },
+            { 
+                src: 'logo_2.jpg.jpg', 
+                fallback: 'logo_2.jpg', 
+                caption: 'Ibrahim Al-Maadawi Logo' 
+            },
+            { 
+                src: 'Gemini_Generated_Image_tscz0ctscz0ctscz.jpg', 
+                fallback: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop', 
+                caption: 'Brand Emblem & Analytics Concept' 
+            },
+            { 
+                src: '818973a1-204a-40ac-b5df-166a6dfde7c1.png', 
+                fallback: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop', 
+                caption: 'Analytics Dashboard Setup' 
+            },
+            { 
+                src: 'e3d560d9-34bf-45d9-8d3c-2e6b9101a3e9.png', 
+                fallback: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop', 
+                caption: 'Data Analysis Workspace' 
+            }
+        ];
+
+        let currentGalleryIndex = 0;
+
+        function openGalleryModal(index = 0) {
+            currentGalleryIndex = index;
+            updateGalleryImage();
+            document.getElementById('gallery-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGalleryModal() {
+            document.getElementById('gallery-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateGalleryImage() {
+            const item = galleryImages[currentGalleryIndex];
+            const imgEl = document.getElementById('gallery-img');
+            imgEl.src = item.src;
+            document.getElementById('gallery-caption').innerText = item.caption;
+        }
+
+        function nextGalleryImage() {
+            currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+            updateGalleryImage();
+        }
+
+        function prevGalleryImage() {
+            currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateGalleryImage();
+        }
+
+        window.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('gallery-modal');
+            if (!modal.classList.contains('hidden')) {
+                if (e.key === 'ArrowRight') nextGalleryImage();
+                if (e.key === 'ArrowLeft') prevGalleryImage();
+                if (e.key === 'Escape') closeGalleryModal();
+            }
+        });
+
+        function filterProjects(category, e) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-orange', 'text-white');
+                btn.classList.add('dark:bg-brand-card', 'bg-white', 'dark:text-gray-300', 'text-gray-700');
+            });
+
+            if (e && e.currentTarget) {
+                e.currentTarget.classList.remove('dark:bg-brand-card', 'bg-white', 'dark:text-gray-300', 'text-gray-700');
+                e.currentTarget.classList.add('bg-brand-orange', 'text-white');
+            }
+
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'flex';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        const counters = document.querySelectorAll('.counter');
+        let animated = false;
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + window.innerHeight;
+            const homeSection = document.getElementById('home');
+            
+            if (!animated && homeSection && scrollPos >= homeSection.offsetTop + 200) {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const speed = target / 40;
+                    const updateCount = () => {
+                        count += speed;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count);
+                            setTimeout(updateCount, 40);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+                animated = true;
+            }
+        });
+
+        function copyEmail() {
+            const email = "almdawyabrahym0@gmail.com";
+            navigator.clipboard.writeText(email);
+            const tooltip = document.getElementById('copy-tooltip');
+            tooltip.classList.remove('opacity-0');
+            tooltip.classList.add('opacity-100');
+            setTimeout(() => {
+                tooltip.classList.remove('opacity-100');
+                tooltip.classList.add('opacity-0');
+            }, 2000);
+        }
+
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+            const name = document.getElementById('whatsapp-name').value.trim();
+            const email = document.getElementById('whatsapp-email').value.trim();
+            const message = document.getElementById('whatsapp-message').value.trim();
+            const phoneNumber = "201016187009";
+            const formattedText = `Hello Ibrahim,%0A%0AMy name is *${encodeURIComponent(name)}*.%0AMy Email is: ${encodeURIComponent(email)}.%0A%0A*Message:*%0A${encodeURIComponent(message)}`;
+            window.open(`https://wa.me/${phoneNumber}?text=${formattedText}`, '_blank');
+        }
+
+        function openProjectModal(title, category, desc, tools, challenge, solution, link, imgSrc, impact) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-category').innerText = category;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-tools').innerText = tools;
+            document.getElementById('modal-challenge').innerText = challenge;
+            document.getElementById('modal-solution').innerText = solution;
+            document.getElementById('modal-link').href = link;
+            document.getElementById('modal-img').src = imgSrc;
+            document.getElementById('modal-impact').innerText = impact || 'High Impact Solution';
+            document.getElementById('project-modal').classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+
+        const canvas = document.getElementById('data-bg');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const nodes = [];
+        const nodeCount = Math.floor((width * height) / 18000);
+
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: (Math.random() - 0.5) * 0.8,
+                radius: Math.random() * 2 + 1
+            });
+        }
+
+        function animateDataNetwork() {
+            ctx.clearRect(0, 0, width, height);
+            const lineColor = 'rgba(249, 115, 22, ';
+            const nodeColor = '#f97316';
+
+            for (let i = 0; i < nodes.length; i++) {
+                let node = nodes[i];
+
+                node.x += node.vx;
+                node.y += node.vy;
+
+                if (node.x < 0 || node.x > width) node.vx *= -1;
+                if (node.y < 0 || node.y > height) node.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = nodeColor;
+                ctx.fill();
+
+                for (let j = i + 1; j < nodes.length; j++) {
+                    let other = nodes[j];
+                    let dx = node.x - other.x;
+                    let dy = node.y - other.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(node.x, node.y);
+                        ctx.lineTo(other.x, other.y);
+                        ctx.strokeStyle = lineColor + (1 - dist / 130) * 0.25 + ')';
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateDataNetwork);
+        }
+
+        animateDataNetwork();
+    </script>
+</body>
+</html>
